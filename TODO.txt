@@ -1,0 +1,2 @@
+TODO:
+* Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
