@@ -29,7 +29,7 @@
             }
         ?>
         <tr>
-            <td><a href = "kat_bearbeiten.php?id=neu">Neue Kategorie hinzufügen</a></td><td></td>
+            <td><a href = "kat_hinzufuegen.php">Neue Kategorie hinzufügen</a></td><td></td>
         </tr>
         </table>
         <?php
