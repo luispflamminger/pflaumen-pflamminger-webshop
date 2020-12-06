@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> "Pflaumen Pflamminger: Kategorien"</title>
+    <title>Pflaumen Pflamminger: Kategorien</title>
     <?php
     session_start();
-    if($_SESSION["typ"] == "admin")
+    if(isset($_SESSION["typ"]) && $_SESSION["typ"] == "admin")
     {
         $con = mysqli_connect("","root");
         mysqli_select_db($con,"pflaumenshop");
@@ -21,22 +21,22 @@
         <th>Kategoriename</th><th></th>
         </tr>
         <?php
-            echo mysqli_num_rows($res);
-            while ($dsatz = mysqli_fetch_assoc($res)) {
-               echo "<tr> <td> ".$dsatz["name"]." </td>";
-               echo "<td> <a href='kat_bearbeiten.php?id=".$dsatz["id"].">Bearbeiten</a> </td>";
+            while ($dsatz = mysqli_fetch_assoc($res)) { 
+               echo "<tr>";
+               echo "<td>"." ".$dsatz["name"]." </td>";
+               echo "<td> <a href='kat_bearbeiten.php?id=".$dsatz["id"]."'>Bearbeiten</a> </td>";
                echo "</tr>";
             }
         ?>
         <tr>
-            <td><a href = "kat_hinzufügen.php?id=neu">Neue Kategorie hinzufügen</a></td><td></td>
+            <td><a href = "kat_bearbeiten.php?id=neu">Neue Kategorie hinzufügen</a></td><td></td>
         </tr>
         </table>
         <?php
     }else{
+        header("Refresh:3;login.php");
         echo "Zugriff verweigert. Sie werden in 3 Sekunden zum login weitergeleitet";
-        sleep(3);
-        header("Location: login.php");
+        
     }
     ?>
     
