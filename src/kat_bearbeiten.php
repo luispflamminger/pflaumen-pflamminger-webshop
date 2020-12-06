@@ -11,7 +11,7 @@
             $con = mysqli_connect("","root");
             mysqli_select_db($con,"pflaumenshop");
             $sql = "SELECT name FROM kategorie WHERE id=" . $_GET["id"];
-            $name = mysqli_query($con, $_GET)
+            $name = mysqli_query($con, $_GET);
 
             if (isset($_POST["kategorie"])) {
                 //Änderung bereits abgeschickt
