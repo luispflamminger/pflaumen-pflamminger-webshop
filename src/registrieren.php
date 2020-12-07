@@ -28,7 +28,7 @@
                     //E-Mail existiert bereits
                     $meldung = "Diese E-Mail existiert bereits! Bitte loggen Sie sich <a href='login.php'>hier</a> ein.";
                     mysqli_close($con);
-                } else { //TODO: Datenbank auf positive Rückmeldung prüfen
+                } else { //TODO: Datenbank auf positive Rückmeldung prüfen ($res wird in dem Fall true, sonst false)
                     //Registrierung erfolgreich
                     session_start();
                     $_SESSION["login"] = "ok";

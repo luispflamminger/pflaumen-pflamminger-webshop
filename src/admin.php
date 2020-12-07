@@ -24,7 +24,7 @@
             while ($dsatz = mysqli_fetch_assoc($res)) { 
                echo "<tr>";
                echo "<td>"." ".$dsatz["name"]." </td>";
-               echo "<td> <a href='kat_bearbeiten.php?id=".$dsatz["id"]."'>Bearbeiten</a> </td>";
+               echo "<td> <a href='kat_bearbeiten.php?id=".$dsatz["id"]."&name=".htmlspecialchars("Test 1234")."'>Bearbeiten</a> </td>";
                echo "</tr>";
             }
         ?>
