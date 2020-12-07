@@ -6,6 +6,13 @@
     session_start();
     if(isset($_SESSION["typ"]) && $_SESSION["typ"] == "admin")
     {
+        if(isset($_GET["gelöscht"]) && $_GET["gelöscht"] == "true")
+        {
+            $meldung = "Datensatz gelöscht";
+        }
+        else {
+            $meldung ="";
+        }
         $con = mysqli_connect("","root");
         mysqli_select_db($con,"pflaumenshop");
         $sql ="SELECT * FROM kategorie";
@@ -14,7 +21,9 @@
 </head>
 <body>
     <?php
-        echo "Hallo ".$_SESSION["vorname"]."!  (falls du kein Admin bist bitte mach nichts kaputt)";
+        echo "Hallo ".$_SESSION["vorname"]."!  (falls du kein Admin bist bitte mach nichts kaputt) <br>";
+        echo $meldung;
+        
     ?>
         <table border = "1">
         <tr>
@@ -24,7 +33,7 @@
             while ($dsatz = mysqli_fetch_assoc($res)) { 
                echo "<tr>";
                echo "<td>"." ".$dsatz["name"]." </td>";
-               echo "<td> <a href='kat_bearbeiten.php?id=".$dsatz["id"]."&name=".htmlspecialchars("Test 1234")."'>Bearbeiten</a> </td>";
+               echo "<td> <a href='kat_bearbeiten.php?id=".$dsatz["id"]."&name=".htmlspecialchars($dsatz["name"])."'>Bearbeiten</a> </td>";
                echo "</tr>";
             }
         ?>
