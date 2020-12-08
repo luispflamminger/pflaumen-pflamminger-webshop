@@ -3,6 +3,8 @@
     <head>
         <title>Pflaumen Pflamminger: Registrierung</title>
         <?php
+        require "../funktionen.php";
+        
         if(isset($_POST["email"])) {
             $pattern = "/.+\@[A-Za-z]+\.[A-Za-z]+$/";
             if ($_POST["passwort"] != $_POST["passwort1"]) {
@@ -16,8 +18,7 @@
                 $meldung = "Bitte geben Sie ihren Vor- und Nachnamen an!";
             } else {
                 //Eingaben sind korrekt
-                $con = mysqli_connect("","root");
-                mysqli_select_db($con,"pflaumenshop");
+                $con = db_verbinden();
                 $sql = "INSERT benutzer (typ, email, password, vorname, name)";
                 $sql .= " values ('kunde', '" . $_POST["email"] . "', '";
                 $sql .= $_POST["passwort"] . "', '" . $_POST["vorname"] . "', '";

@@ -3,9 +3,10 @@
     <head>
         <title>Pflaumen Pflamminger: Die besten Pflaumen</title>
         <?php
+        require "../funktionen.php";
+        
         if(isset($_POST["email"])) {
-            $con = mysqli_connect("","root");
-            mysqli_select_db($con,"pflaumenshop");
+            $con = db_verbinden();
             $sql = "SELECT * FROM benutzer WHERE email = '".$_POST["email"]."' ";
             $res = mysqli_query($con, $sql);
             $dsatz = mysqli_fetch_assoc($res);
@@ -20,7 +21,7 @@
                     $_SESSION["nachname"] = $dsatz["name"];
                     $_SESSION["email"] = $dsatz["email"];
                     $_SESSION["typ"] = $dsatz["typ"];
-                    header("Location: admin.php");
+                    header("Location: ../admin/admin.php");
                     mysqli_close($con);
                     exit;
                 } else if ($dsatz["typ"] == "kunde") {
@@ -30,7 +31,7 @@
                     $_SESSION["nachname"] = $dsatz["nachname"];
                     $_SESSION["email"] = $dsatz["email"];
                     $_SESSION["typ"] = $dsatz["typ"];
-                    header("Location: shop.php?newUser=false");
+                    header("Location: ../shop/shop.php?newUser=false");
                     mysqli_close($con);
                     exit;
                 } else {
