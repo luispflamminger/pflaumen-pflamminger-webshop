@@ -106,7 +106,7 @@
                 $res = mysqli_query($con, $sql);
 
                 if ($res && mysqli_affected_rows($con) == 1) {
-                    $meldung = "Kategorie erfolgreich hinzugefügt!";
+                    $meldung = "Artikel erfolgreich hinzugefügt!";
                 } else {
                     $meldung = "Etwas ist schiefgelaufen...";
                 }

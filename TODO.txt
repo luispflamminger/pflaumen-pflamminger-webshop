@@ -1,2 +1,32 @@
 TODO:
 * Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
+* DB in allen Dateien schließen
+
+* Shop:
+    * Startseite:
+        * Persönliche Begrüßung
+        * Kategorien von Produkten anzeigen
+        * Kunde soll Kategorie auswählen
+          -> Produkte der Kategorie anzeigen
+    * Kategorieseite:
+        * Liste von Artikeln
+        -> Mit Klick zur Artikelseite
+        
+    * Artikelseite:
+        * Anzahl auswählen und zum Warenkorb hinzufügen können
+        * Bild und Beschreibung
+        * Bewertungen ansehen
+        * Bewertungen verfassen
+        -> Zur Bewertung-Verfassen Seite
+        * Antworten anzeigen können
+        * Antwort verfassen können
+    
+    * Bewertung verfassen:
+        * Text der Bewertung
+        * Anzahl an Pflaumen 0/5
+    
+    * Bewertung ansehen:
+        * Bewertung + Antworten anzeigen
+        * Antworten verfassen
+
+    * Antwort verfassen (vllt. auch zusammen mit Bewertung verfassen)

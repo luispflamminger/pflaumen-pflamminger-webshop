@@ -31,7 +31,7 @@
                     $_SESSION["nachname"] = $dsatz["nachname"];
                     $_SESSION["email"] = $dsatz["email"];
                     $_SESSION["typ"] = $dsatz["typ"];
-                    header("Location: ../shop/shop.php?newUser=false");
+                    header("Location: ../shop/start.php?newUser=false");
                     mysqli_close($con);
                     exit;
                 } else {
