@@ -1,6 +1,7 @@
 TODO:
 * Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
 * DB in allen Dateien schließen
+* Wie bekommt man die Beschreibungen mit Zeilenumbrüchen aus der Datenbank?
 
 * Shop:
     * Startseite:
