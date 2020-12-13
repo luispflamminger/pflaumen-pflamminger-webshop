@@ -1,0 +1,12 @@
+/* .bg-primary {
+  background-color: #8c2771 !important;
+} */
+
+.btn-primary {
+  background-color: #8c2771;
+}
+
+.login-container {
+  max-width: 22em;
+  margin-top: 7em;
+}

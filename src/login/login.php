@@ -4,7 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="../custom-style.css">
 
         <title>Pflaumen Pflamminger: Die besten Pflaumen</title>
         
@@ -52,14 +56,15 @@
         ?>
     </head>
     <body class="bg-light">
-        <div class="container" style="max-width: 22em; margin-top: 7em;">
-            <img class="mx-auto d-block" 
-                src="../../img/plum-logo.png"
-                alt="Pflaumen Pflamminger Logo"
-                width="100"
-                height="100"
-            />
-            <div class="border rounded-lg p-3 m-3 bg-white">
+        <div class="container login-container">
+            <div class="row p-3 m-3">
+                <img 
+                    class="img-fluid"
+                        src="../../img/logo_schrift.png"
+                        alt="Pflaumen Pflamminger Logo"
+                    />
+            </div>
+            <div class="border rounded-lg p-3 m-1 bg-white">
                 <?php
                 if (isset($meldung)) {
                     echo "<div class='alert alert-danger'>$meldung</div>";
@@ -88,10 +93,10 @@
                             value="<?php if (isset($_POST["passwort"])) { echo $_POST["passwort"]; } ?>"
                         />
                     </div>
-                    <button class="btn btn-primary mb-2" style="background-color: #8C2771;" type="submit">Einloggen</button>
+                    <button class="btn btn-primary mb-2" type="submit">Einloggen</button>
                 </form>
             </div>
-            <div class="pl-3 pt-1 m-3">
+            <div class="pl-3 pt-1 m-1">
                 <div class="mb-1">Neu bei Pflaumen Pflamminger?</div>
                 <a class="btn btn-outline-secondary mb-2" href="registrieren.php">Registrieren</a>
             </div>
