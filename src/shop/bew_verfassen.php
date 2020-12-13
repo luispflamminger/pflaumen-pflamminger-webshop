@@ -65,7 +65,7 @@
         <input type="submit" name="verfassen" value="Verfassen">
     </form>
     <br>
-    <a href="artikel.php">Zurück</a>
+    <a href="artikel.php?id=<?php echo $artId; ?>">Zurück</a>
     <?php
     echo "<p>$meldung</p>";
     ?>

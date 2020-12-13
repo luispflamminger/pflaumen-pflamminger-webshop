@@ -2,7 +2,10 @@ TODO:
 * Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
 * DB in allen Dateien schließen
 * Wie bekommt man die Beschreibungen mit Zeilenumbrüchen aus der Datenbank?
-
+* Bewertung: Titelfeld länger machen
+* Admin Artikel hinzufügen: Nach dem Hinzufügen bleiben die Artikel nicht auf die Kategorie eingegrenzt
+* Änderungen an der Datenbank (beim Keiser noch übertragen):
+    * Feld artikel in Tabelle bewertung darf Null sein
 * Shop:
     * Startseite:
         * Persönliche Begrüßung

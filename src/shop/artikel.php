@@ -54,7 +54,7 @@
             echo "<p>" . $dsatzBew["bewertung"] . " von 5 Pflaumen</p>";
             echo "<h4>" . $dsatzBew["titel"] . "</h4>";
             echo "<p>" . $dsatzBew["beschreibung"] . "</p>";
-            echo "<a href='bewertung.php?id=" . $dsatzBew["id"] . "'>Antworten anzeigen</a> | <a href='antw_verfassen.php?" . $dsatzBew["id"] . "'>Antwort verfassen</a>";
+            echo "<a href='bewertung.php?id=" . $dsatzBew["id"] . "'>Antworten anzeigen</a> | <a href='antw_verfassen.php?id=" . $dsatzBew["id"] . "'>Antwort verfassen</a>";
         }
         echo "<p>--------------------------------------------------------------</p>";
         echo "<a href='bew_verfassen.php?id=" . $dsatzArt["id"] . "'>Bewertung verfassen</a>"; 
