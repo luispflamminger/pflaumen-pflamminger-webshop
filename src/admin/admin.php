@@ -33,10 +33,14 @@
     ?>
 </head>
 
+
 <?php 
+/* Navbar
 $activeFile = pathinfo(__FILE__, PATHINFO_FILENAME);
 $activeSubdir = substr(pathinfo(__FILE__, PATHINFO_DIRNAME), strrpos(pathinfo(__FILE__, PATHINFO_DIRNAME), "\\")+1);
-require "../navbar.php"; ?>
+require "../navbar.php"; 
+*/
+?>
 
 <body>
     <?php

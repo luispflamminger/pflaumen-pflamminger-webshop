@@ -35,12 +35,13 @@
         <img src='../../<?php echo $dsatzArt["bild"]; ?>' width='100' height='100' />
         <p><?php echo $dsatzArt["beschreibung"]; ?></p>
 
-        <form action="artikel.php" method="POST">
+        <form action="warenkorb.php" method="POST">
             <select name="anzahl" >
                 <option value=1 selected>1</option>
                 <?php for ($i=2; $i <= 30; $i++) { echo "<option value=$i>$i</option>"; } ?>
             </select>
-            <input type="submit" name="hinzufuegen" value="In den Einkaufswagen">
+            <input type="hidden" name="artikelID" value="<?php echo $id; ?>">
+            <input type="submit" name="hinzufuegen" value="In den Warenkorb">
         </form>
 
         <h3>Bewertungen</h3>

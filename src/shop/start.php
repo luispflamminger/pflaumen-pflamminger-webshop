@@ -31,7 +31,7 @@ require "../navbar.php"; ?>
     <?php
 
     echo "<h2>Willkommen bei Pflaumen Pflamminger, ".$_SESSION["vorname"]."!</h2>";     
-    echo __FILE__; 
+    
     ?>
 
     <div>

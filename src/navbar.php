@@ -16,10 +16,14 @@
         <li class="nav-item <?php if ($activeFile == "warenkorb") { echo "active"; } ?>">
             <a class="nav-link" href="../shop/warenkorb.php">Warenkorb<?php if ($activeFile == "warenkorb") { echo "<span class='sr-only'>(current)</span>"; } ?></a>
         </li>
-        <?php if ($_SESSION["typ"] == "admin") { ?>
+
+        <!-- 
+            Folgender Code würde dem Admin Zugriff auf das Admin-Portal vom Shop aus ermöglichen:
+            <?php if ($_SESSION["typ"] == "admin") { ?>
             <li class="nav-item <?php if ($activeSubdir == "admin") { echo "active"; } ?>">
                 <a class="nav-link" href="../admin/admin.php">Admin-Verwaltung<?php if ($activeFile == "admin") { echo "<span class='sr-only'>(current)</span>"; } ?></a>
             </li>
         <?php } ?>
+        -->
     </ul>
 </nav>

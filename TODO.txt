@@ -1,36 +1,28 @@
-TODO:
-* Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
 * DB in allen Dateien schließen
-* Wie bekommt man die Beschreibungen mit Zeilenumbrüchen aus der Datenbank?
 * Bewertung: Titelfeld länger machen
-* Admin Artikel hinzufügen: Nach dem Hinzufügen bleiben die Artikel nicht auf die Kategorie eingegrenzt
+* Wie bekommt man die Beschreibungen mit Zeilenumbrüchen aus der Datenbank?
+* Überall htmlspecialchars() und htmlspecialchars_decode() hinterlegen
+* Code kommentieren
+* Styles hinterlegen
 * Änderungen an der Datenbank (beim Keiser noch übertragen):
     * Feld artikel in Tabelle bewertung darf Null sein
-* Shop:
-    * Startseite:
-        * Persönliche Begrüßung
-        * Kategorien von Produkten anzeigen
-        * Kunde soll Kategorie auswählen
-          -> Produkte der Kategorie anzeigen
-    * Kategorieseite:
-        * Liste von Artikeln
-        -> Mit Klick zur Artikelseite
-        
-    * Artikelseite:
-        * Anzahl auswählen und zum Warenkorb hinzufügen können
-        * Bild und Beschreibung
-        * Bewertungen ansehen
-        * Bewertungen verfassen
-        -> Zur Bewertung-Verfassen Seite
-        * Antworten anzeigen können
-        * Antwort verfassen können
-    
-    * Bewertung verfassen:
-        * Text der Bewertung
-        * Anzahl an Pflaumen 0/5
-    
-    * Bewertung ansehen:
-        * Bewertung + Antworten anzeigen
-        * Antworten verfassen
+* Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
+* Produkte aus dem Warenkorb entfernen können
 
-    * Antwort verfassen (vllt. auch zusammen mit Bewertung verfassen)
+erledigt:
+x Verschmelzung von Admin und Kundenportalen wieder aufheben
+x Admin Artikel ändern einbauen
+    x Falls kein Bild hochgeladen wurde, Pfad beibehalten
+x Admin Artikel hinzufügen: Nach dem Hinzufügen bleiben die Artikel nicht auf die Kategorie eingegrenzt
+x Warenkorb einbauen:
+    x Wird ein Artikel dem Warenkorb hinzugefügt
+        -> In das Session Array eingeben
+        -> Weiterleitung zur Warenkorb Seite
+    x Warenkorb-Seite:
+        x Produkte und Anzahl aus dem Array lesen und in eine Tabelle schreiben
+        $_SESSION["warenkorb"][0] = array(artnr, q);
+        $_SESSION["warenkorb"][1] = array(artnr, q);
+        $_SESSION["warenkorb"][count($_SESSION["warenkorb"])] = array(artnr, q);
+        $artnr = $_SESSION["warenkorb"][1][0];
+        $quantity = $_SESSION["warenkorb"][1][1];
+        x Link zur Kasse

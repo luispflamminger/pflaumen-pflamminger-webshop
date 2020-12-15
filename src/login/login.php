@@ -38,9 +38,10 @@
                     session_start();
                     $_SESSION["login"] = "ok";
                     $_SESSION["vorname"] = $dsatz["vorname"];
-                    $_SESSION["nachname"] = $dsatz["nachname"];
+                    $_SESSION["nachname"] = $dsatz["name"];
                     $_SESSION["email"] = $dsatz["email"];
                     $_SESSION["typ"] = $dsatz["typ"];
+
                     header("Location: ../shop/start.php?newUser=false");
                     mysqli_close($con);
                     exit;

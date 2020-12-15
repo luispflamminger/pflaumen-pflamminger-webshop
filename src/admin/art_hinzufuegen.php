@@ -6,7 +6,7 @@
     <?php
     session_start();
     require "../funktionen.php";
-    //authentifizierung($_SESSION["typ"], "admin");
+    authentifizierung($_SESSION["typ"], "admin");
 
     if(!isset($_POST["hinzufuegen"])) {
         $meldung = "";
@@ -60,47 +60,55 @@
             //Alles passt
             
             //****Code für Dateiupload****
-            $zielpfad = "../../img/" . basename($_FILES["bild"]["name"]);
-            $dateityp = strtolower(pathinfo($zielpfad,PATHINFO_EXTENSION));
-            $uploadOk = true;
-            $uploadMeldung = "";
-            //Ist die Datei ein Bild
-            $check = getimagesize($_FILES["bild"]["tmp_name"]);
-            if ($check == false && $uploadOk == true) {
+            if ($_FILES["bild"]["name"] == "") {
+                //Kein Bild hochgeladen
+                $uploadMeldung = "Bitte lade ein Bild hoch!";
                 $uploadOk = false;
-                $meldung = "Datei ist kein Bild!";
-            }
+            } else {
 
-            //Datei umbenennen falls sie existiert
-            while (file_exists($zielpfad) && $uploadOk == true) {
-                $zielpfad = substr($zielpfad, 0, strrpos($zielpfad, "."));
-                $zielpfad .= "1.$dateityp";
-            }
-
-            //Dateigröße prüfen
-            if ($_FILES["bild"]["size"] > 500000 && $uploadOk == true) {
-                $uploadOk = false;
-                $uploadMeldung = "Datei ist zu groß";
-            }
-
-            //Dateityp prüfen
-            if ($dateityp != "jpg" && $dateityp != "jpeg" && $dateityp != "png" && $uploadOk == true) {
-                $uploadOk = false;
-                $uploadMeldung = "Es sind nur Bilder vom Typ JPG oder PNG erlaubt!";
-            }
-
-            if ($uploadOk == true) {
-                if (!move_uploaded_file($_FILES["bild"]["tmp_name"], $zielpfad)) {
+                $zielpfad = "../../img/" . basename($_FILES["bild"]["name"]);
+                $dateityp = strtolower(pathinfo($zielpfad,PATHINFO_EXTENSION));
+                $uploadOk = true;
+                $uploadMeldung = "";
+                //Ist die Datei ein Bild
+                $check = getimagesize($_FILES["bild"]["tmp_name"]);
+                if ($check == false && $uploadOk == true) {
                     $uploadOk = false;
-                    $uploadMeldung = "Es gab einen Fehler beim Upload. Bitte versuche es nochmal.";
+                    $meldung = "Datei ist kein Bild!";
+                }
+
+                //Datei umbenennen falls sie existiert
+                while (file_exists($zielpfad) && $uploadOk == true) {
+                    $zielpfad = substr($zielpfad, 0, strrpos($zielpfad, "."));
+                    $zielpfad .= "1.$dateityp";
+                }
+
+                //Dateigröße prüfen
+                if ($_FILES["bild"]["size"] > 500000 && $uploadOk == true) {
+                    $uploadOk = false;
+                    $uploadMeldung = "Datei ist zu groß";
+                }
+
+                //Dateityp prüfen
+                if ($dateityp != "jpg" && $dateityp != "jpeg" && $dateityp != "png" && $uploadOk == true) {
+                    $uploadOk = false;
+                    $uploadMeldung = "Es sind nur Bilder vom Typ JPG oder PNG erlaubt!";
+                }
+
+                if ($uploadOk == true) {
+                    if (!move_uploaded_file($_FILES["bild"]["tmp_name"], $zielpfad)) {
+                        $uploadOk = false;
+                        $uploadMeldung = "Es gab einen Fehler beim Upload. Bitte versuche es nochmal.";
+                    } else {
+                        //Zielpfad für Datenbank fertig machen (../../ entfernen)
+                        $zielpfad = substr($zielpfad, 6);
+                    }
                 }
             }
 
             if ($uploadOk == false) {
                 $meldung = $uploadMeldung;
             } else {
-                //Zielpfad für Datenbank fertig machen (../../ entfernen)
-                $zielpfad = substr($zielpfad, 6);
 
                 $sql = "INSERT artikel (name, beschreibung, kategorie, bild, preis) values ('$name', '$beschreibung', $kategorie, '$zielpfad', $preis)";
                 $res = mysqli_query($con, $sql);
@@ -147,7 +155,7 @@
         <input type="submit" name="hinzufuegen" value="Hinzufügen">
     </form>
     <br>
-    <a href="artikel.php">Zurück</a>
+    <a href="artikel.php?katId=<?php echo $katId; ?>">Zurück</a>
     <?php
     echo "<p>$meldung</p>";
     ?>
