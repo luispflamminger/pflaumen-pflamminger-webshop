@@ -17,9 +17,11 @@
         
         if(isset($_POST["email"])) {
             $con = db_verbinden();
-            $sql = "SELECT * FROM benutzer WHERE email = '".$_POST["email"]."' ";
+            $sql = "SELECT * FROM benutzer WHERE email = '";
+            $sql .= htmlspecialchars($_POST["email"]) ."' ";
             $res = mysqli_query($con, $sql);
             $dsatz = mysqli_fetch_assoc($res);
+            mysqli_close($con);
             if (mysqli_num_rows($res) == 0) {
                 $meldung = "Diese E-Mail existiert nicht. Bitte registrieren Sie sich <a href='registrieren.php'>hier</a>.";
             } else if($_POST["passwort"] == $dsatz["password"]) {
@@ -32,7 +34,6 @@
                     $_SESSION["email"] = $dsatz["email"];
                     $_SESSION["typ"] = $dsatz["typ"];
                     header("Location: ../admin/admin.php");
-                    mysqli_close($con);
                     exit;
                 } else if ($dsatz["typ"] == "kunde") {
                     session_start();
@@ -43,15 +44,12 @@
                     $_SESSION["typ"] = $dsatz["typ"];
 
                     header("Location: ../shop/start.php?newUser=false");
-                    mysqli_close($con);
                     exit;
                 } else {
                     $meldung = "Unbekannter Fehler.<br>Bitte versuchen Sie es nochmal!";
-                    mysqli_close($con);
                 }
             } else {
                 $meldung = "Das Passwort ist falsch!";
-                mysqli_close($con);
             }
         }
         ?>
@@ -80,7 +78,7 @@
                             name="email"
                             size="20"
                             maxlength="30"
-                            value="<?php if (isset($_POST["email"])) { echo $_POST["email"]; } ?>"
+                            value="<?php if (isset($_POST["email"])) { echo htmlspecialchars($_POST["email"]); } ?>"
                         />
                     </div>
                     <div class="form-group">
@@ -91,7 +89,7 @@
                             name="passwort"
                             size="20"
                             maxlength="30"
-                            value="<?php if (isset($_POST["passwort"])) { echo $_POST["passwort"]; } ?>"
+                            value="<?php if (isset($_POST["passwort"])) { echo htmlspecialchars($_POST["passwort"]); } ?>"
                         />
                     </div>
                     <button class="btn btn-primary mb-2" type="submit">Einloggen</button>

@@ -46,6 +46,8 @@ require "../navbar.php"; ?>
             echo "<td><a href='kategorie.php?katId=" . $dsatz["id"] . "&katName=" . $dsatz["name"] . "'>".$dsatz["name"]."</a></td>";
             echo "</tr>";
         }
+
+        mysqli_close($con);
         ?>
         </table>
 

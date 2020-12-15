@@ -13,7 +13,7 @@
         $sql = "SELECT * FROM kategorie";
         $res = mysqli_query($con, $sql);
         
-        $name = $_POST["name"];
+        $name = htmlspecialchars($_POST["name"]);
         //Prüfen ob Name bereits existiert
         $existiert = false;
         while ($dsatz = mysqli_fetch_assoc($res)) {
@@ -40,6 +40,7 @@
                 $meldung = "Etwas ist schiefgelaufen...";
             }
         }
+        mysqli_close($con);
     }
     else
     {

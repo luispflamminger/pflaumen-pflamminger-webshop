@@ -1,15 +1,17 @@
-* DB in allen Dateien schließen
-* Bewertung: Titelfeld länger machen
-* Wie bekommt man die Beschreibungen mit Zeilenumbrüchen aus der Datenbank?
-* Überall htmlspecialchars() und htmlspecialchars_decode() hinterlegen
-* Code kommentieren
 * Styles hinterlegen
-* Änderungen an der Datenbank (beim Keiser noch übertragen):
-    * Feld artikel in Tabelle bewertung darf Null sein
+* Kategorie Fashion pflegen
+* Code kommentieren
 * Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
 * Produkte aus dem Warenkorb entfernen können
 
 erledigt:
+x Änderungen an der Datenbank (beim Keiser noch übertragen):
+    x Feld artikel in Tabelle bewertung darf Null sein
+    x Feld titel in Tabelle bewertung auf varchar(50) erhöhen
+x DB in allen Dateien schließen
+x Wie bekommt man die Beschreibungen mit Zeilenumbrüchen aus der Datenbank?
+x Überall htmlspecialchars() und hinterlegen
+x Bewertung: Titelfeld länger machen
 x Verschmelzung von Admin und Kundenportalen wieder aufheben
 x Admin Artikel ändern einbauen
     x Falls kein Bild hochgeladen wurde, Pfad beibehalten
@@ -20,9 +22,9 @@ x Warenkorb einbauen:
         -> Weiterleitung zur Warenkorb Seite
     x Warenkorb-Seite:
         x Produkte und Anzahl aus dem Array lesen und in eine Tabelle schreiben
-        $_SESSION["warenkorb"][0] = array(artnr, q);
-        $_SESSION["warenkorb"][1] = array(artnr, q);
-        $_SESSION["warenkorb"][count($_SESSION["warenkorb"])] = array(artnr, q);
-        $artnr = $_SESSION["warenkorb"][1][0];
-        $quantity = $_SESSION["warenkorb"][1][1];
+        $ _SESSION["warenkorb"][0] = array(artnr, q);
+        $ _SESSION["warenkorb"][1] = array(artnr, q);
+        $ _SESSION["warenkorb"][count($ _SESSION["warenkorb"])] = array(artnr, q);
+        $artnr = $ _SESSION["warenkorb"][1][0];
+        $quantity = $ _SESSION["warenkorb"][1][1];
         x Link zur Kasse

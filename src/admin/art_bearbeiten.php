@@ -10,9 +10,9 @@
 
     //ID des Artikels festlegen
     if (isset($_POST["id"]) && $_POST["id"] != "") {
-        $id = $_POST["id"];
+        $id = htmlspecialchars($_POST["id"]);
     } else if (isset($_GET["id"]) && $_GET["id"] != "") {
-        $id = $_GET["id"];
+        $id = htmlspecialchars($_GET["id"]);
     } else {
         //Kein zu bearbeitender Artikel definiert
         header("Location: artikel.php");
@@ -26,17 +26,19 @@
         $sql = "SELECT * FROM artikel";
         $res = mysqli_query($con, $sql);
         
-        $name = $_POST["name"];
-        $beschreibung = $_POST["beschreibung"];
-        $kategorie = $_POST["kategorie"];
-        $preis = $_POST["preis"];
+        $name = htmlspecialchars($_POST["name"]);
+        $beschreibung = htmlspecialchars($_POST["beschreibung"]);
+        $kategorie = htmlspecialchars($_POST["kategorie"]);
+        $preis = htmlspecialchars($_POST["preis"]);
         
         //Prüfen ob Name bereits existiert
         $existiert = false;
-        while ($dsatz = mysqli_fetch_assoc($res)) {
-            if ($dsatz["name"] == $name) {
-                $existiert = true;
-                break;
+        if ($_POST["nameAlt"] != $_POST["name"]) {
+            while ($dsatz = mysqli_fetch_assoc($res)) {
+                if ($dsatz["name"] == $name) {
+                    $existiert = true;
+                    break;
+                }
             }
         }
 
@@ -135,6 +137,7 @@
                 }
             }
         }
+        mysqli_close($con);
     }
     ?>
 </head>
@@ -149,8 +152,8 @@
     ?>
 
     <form action = art_bearbeiten.php method="post" enctype="multipart/form-data">
-        Artikelname: <input type="text" name="name" size=20 maxlength="40" value="<?php echo htmlspecialchars($dsatzArtikel["name"]); ?>"><br>
-        Beschreibung: <textarea rows="8" cols="20" name="beschreibung"><?php echo htmlspecialchars($dsatzArtikel["beschreibung"]); ?></textarea><br>
+        Artikelname: <input type="text" name="name" size=20 maxlength="40" value="<?php echo $dsatzArtikel["name"]; ?>"><br>
+        Beschreibung: <textarea rows="8" cols="20" name="beschreibung"><?php echo $dsatzArtikel["beschreibung"]; ?></textarea><br>
         Kategorie: 
         <select name="kategorie" >
             <?php
@@ -159,20 +162,22 @@
 
             while ($dsatzKat = mysqli_fetch_assoc($res)) {
                 echo "\t\t\t<option value='" . $dsatzKat["id"] . "' ";
-                if ($dsatzKat["id"] = $dsatzArtikel["kategorie"]) { echo "selected "; }
+                if ($dsatzKat["id"] == $dsatzArtikel["kategorie"]) { echo "selected "; }
                 echo ">" . $dsatzKat["name"] . "</option>\n";
             }
             ?>
         </select><br>
-        Preis: <input type="number" step="0.01" name="preis" value="<?php echo htmlspecialchars($dsatzArtikel["preis"]); ?>"><br>
+        Preis: <input type="number" step="0.01" name="preis" value="<?php echo $dsatzArtikel["preis"]; ?>"><br>
         Bild: <input type="file" name="bild"> <br> (Falls Sie kein Bild hochladen, bleibt das bisherige Bild erhalten.)
         <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <input type="hidden" name="nameAlt" value="<?php echo $dsatzArtikel["name"]; ?>">
         <input type="submit" name="aendern" value="Ändern">
     </form>
     <br>
     <a href="artikel.php?katId=<?php echo $dsatzArtikel["kategorie"]; ?>">Zurück</a>
     <?php
-    echo "<p>$meldung</p>";
+    echo "<p>" . $meldung . "</p>";
+    mysqli_close($con);
     ?>
 </body>
 </html>

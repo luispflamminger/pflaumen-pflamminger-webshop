@@ -43,6 +43,7 @@
     $con = db_verbinden();
     $sql = "SELECT * FROM benutzer WHERE email='" . $_SESSION["email"] . "'";
     $dsatzNutzer = mysqli_fetch_assoc(mysqli_query($con, $sql));
+    mysqli_close($con);
     ?>
 </head>
 

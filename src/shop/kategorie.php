@@ -17,13 +17,13 @@
     authentifizierung($_SESSION["typ"], "kunde");
 
     if (isset($_GET["katName"])) {
-        $katName = $_GET["katName"];
+        $katName = htmlspecialchars($_GET["katName"]);
     } else {
         $katName = "";
     }
 
     if (isset($_GET["katId"]) && $_GET["katId"] != "") {
-        $sql ="SELECT * FROM artikel WHERE kategorie = " . $_GET["katId"];
+        $sql ="SELECT * FROM artikel WHERE kategorie = " . htmlspecialchars($_GET["katId"]);
     } else {
         $sql ="SELECT * FROM artikel";
     }
@@ -56,10 +56,12 @@ require "../navbar.php"; ?>
             echo "<tr>";
             echo "<td><img src='../../" . $dsatz["bild"] . "' width='100' height='100' /></td>";
             echo "<td><a href='artikel.php?id=".$dsatz["id"]."&name=".$dsatz["name"]."'>" . $dsatz["name"] . "</a></td>";
-            echo "<td>" . $dsatz["beschreibung"] . "</td>";
+            echo "<td>" . nl2br($dsatz["beschreibung"]) . "</td>";
             echo "<td>" . number_format($dsatz["preis"], 2, ',', '.') . "&nbsp;&euro;</td>";
             echo "</tr>";
         }
+
+        mysqli_close($con);
         ?>
 
     </table>

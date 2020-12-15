@@ -9,7 +9,7 @@
     authentifizierung($_SESSION["typ"], "kunde");
 
     if (isset($_GET["id"])) {
-        $artId = $_GET["id"];
+        $artId = htmlspecialchars($_GET["id"]);
     }
 
     if(!isset($_POST["verfassen"])) {
@@ -25,15 +25,15 @@
             $meldung = "Ein Fehler ist aufgetreten...";
         } else {
             
-            $artId = $_POST["artId"];
+            $artId = htmlspecialchars($_POST["artId"]);
 
             $con = db_verbinden();
             $sql = "SELECT id FROM benutzer WHERE email = '" . $_SESSION["email"] . "'";
             $res = mysqli_query($con, $sql);
             $dsatz = mysqli_fetch_assoc($res);
 
-            $sql = "INSERT bewertung (titel, beschreibung, bewertung, benutzer, artikel) VALUES ('" . $_POST["titel"]
-                  . "', '" . $_POST["beschreibung"] . "', " . $_POST["bewertung"] . ", " . $dsatz["id"] . ", " . $artId . ");";
+            $sql = "INSERT bewertung (titel, beschreibung, bewertung, benutzer, artikel) VALUES ('" . htmlspecialchars($_POST["titel"])
+                  . "', '" . htmlspecialchars($_POST["beschreibung"]) . "', " . htmlspecialchars($_POST["bewertung"]) . ", " . $dsatz["id"] . ", " . $artId . ");";
 
             $res = mysqli_query($con, $sql);
 
@@ -44,6 +44,7 @@
             } else {
                 $meldung = "Etwas ist schiefgelaufen...";
             }
+            mysqli_close($con);
         }
         
 
@@ -53,7 +54,7 @@
 <body>
     <h2>Bewertung verfassen</h2>
     <form action = bew_verfassen.php method="post">
-        Titel: <input type="text" name="titel" size=20 maxlength="30"><br>
+        Titel: <input type="text" name="titel" size=20 maxlength="50"><br>
         Beschreibung: <textarea rows="8" cols="50" name="beschreibung"></textarea><br>
         Bewertung: 
         1 <input type="radio" name="bewertung" value="1" />

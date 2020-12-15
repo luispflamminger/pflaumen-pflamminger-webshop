@@ -9,19 +9,21 @@
     
         if (isset($_GET["id"])) {
             //Nutzer kommt von admin.php
-            $id = $_GET["id"];
-            $nameAlt = $_GET["name"];
+            $id = htmlspecialchars($_GET["id"]);
+            $nameAlt = htmlspecialchars($_GET["name"]);
             $nameNeu = "";
             $meldung = "";
         } else {
+
+            $con = db_verbinden();
+
             if(isset($_POST["update"]))
             {
                 //Nutzer hat Kategorie geändert
-                $id = $_POST["id"];
-                $nameAlt = $_POST["nameAlt"];
-                $nameNeu = $_POST["nameNeu"];
+                $id = htmlspecialchars($_POST["id"]);
+                $nameAlt = htmlspecialchars($_POST["nameAlt"]);
+                $nameNeu = htmlspecialchars($_POST["nameNeu"]);
 
-                $con = db_verbinden();
                 $sql = "SELECT * FROM kategorie";
                 $res = mysqli_query($con, $sql);
                 
@@ -55,8 +57,7 @@
             }
             else
             {
-                $con = db_verbinden();
-                $sql = "DELETE FROM kategorie WHERE" . " name = '".$_POST["nameAlt"]."'";
+                $sql = "DELETE FROM kategorie WHERE" . " name = '" . htmlspecialchars($_POST["nameAlt"]) . "'";
                 $res = mysqli_query($con,$sql);
                 $num = mysqli_affected_rows($con);
                 if ($res && mysqli_affected_rows($con) == 1) {
@@ -68,6 +69,7 @@
                 }
                 
             }
+            mysqli_close($con);
         }
         echo "<title>Pflaumen Pflamminger: " . $nameAlt . " bearbeiten</title>\n";
         ?>
@@ -77,7 +79,7 @@
     <body>
         <h2>Kategorie ändern</h2>
         <p>Geben Sie einen neuen Namen für die Kategorie ein oder löschen Sie diese.</p>
-        <?php echo "<p>" . $_GET["name"] . "</p>"; ?>
+        <?php echo "<p>" . htmlspecialchars($_GET["name"]) . "</p>"; ?>
         <form action="kat_bearbeiten.php" method="post">
         Kategoriename:<br>
         <input type="text" name="nameNeu" size="20" maxlength="40" />

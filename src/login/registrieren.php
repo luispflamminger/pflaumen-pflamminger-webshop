@@ -27,27 +27,28 @@
                 //Eingaben sind korrekt
                 $con = db_verbinden();
                 $sql = "INSERT benutzer (typ, email, password, vorname, name)";
-                $sql .= " values ('kunde', '" . $_POST["email"] . "', '";
-                $sql .= $_POST["passwort"] . "', '" . $_POST["vorname"] . "', '";
-                $sql .= $_POST["nachname"] . "');";
+                $sql .= " values ('kunde', '";
+                $sql .= htmlspecialchars($_POST["email"]) . "', '";
+                $sql .= htmlspecialchars($_POST["passwort"]) . "', '";
+                $sql .= htmlspecialchars($_POST["vorname"]) . "', '";
+                $sql .= htmlspecialchars($_POST["nachname"]) . "');";
                 $res = mysqli_query($con, $sql);
                 
                 if (preg_match("/^Duplicate entry/i", mysqli_error($con))) {
                     //E-Mail existiert bereits
                     $meldung = "Diese E-Mail existiert bereits! Bitte loggen Sie sich <a href='login.php'>hier</a> ein.";
-                    mysqli_close($con);
                 } else { //TODO: Datenbank auf positive Rückmeldung prüfen ($res wird in dem Fall true, sonst false)
                     //Registrierung erfolgreich
                     session_start();
                     $_SESSION["login"] = "ok";
-                    $_SESSION["vorname"] = $_POST["vorname"];
-                    $_SESSION["nachname"] = $_POST["nachname"];
-                    $_SESSION["email"] = $_POST["email"];
+                    $_SESSION["vorname"] = htmlspecialchars($_POST["vorname"]);
+                    $_SESSION["nachname"] = htmlspecialchars($_POST["nachname"]);
+                    $_SESSION["email"] = htmlspecialchars($_POST["email"]);
                     $_SESSION["typ"] = "kunde";
                     header("Location: shop.php?newUser=true");
                     exit;
                 }
-                
+                mysqli_close($con);                
             }
         }
         ?>
@@ -76,7 +77,7 @@
                         name="email"
                         size="20"
                         maxlength="30"
-                        value="<?php if (isset($_POST["email"])) { echo $_POST["email"]; } ?>"
+                        value="<?php if (isset($_POST["email"])) { echo htmlspecialchars($_POST["email"]); } ?>"
                     />
                 </div>
                 <div class="form-group">
@@ -87,7 +88,7 @@
                         name="vorname"
                         size="20"
                         maxlength="30"
-                        value="<?php if (isset($_POST["vorname"])) { echo $_POST["vorname"]; } ?>"
+                        value="<?php if (isset($_POST["vorname"])) { echo htmlspecialchars($_POST["vorname"]); } ?>"
                     />
                 </div>
                 <div class="form-group">
@@ -98,7 +99,7 @@
                         name="nachname"
                         size="20"
                         maxlength="30"
-                        value="<?php if (isset($_POST["nachname"])) { echo $_POST["nachname"]; } ?>"
+                        value="<?php if (isset($_POST["nachname"])) { echo htmlspecialchars($_POST["nachname"]); } ?>"
                     />
                 </div>
                 <div class="form-group">
@@ -109,7 +110,7 @@
                         name="passwort"
                         size="20"
                         maxlength="30"
-                        value="<?php if (isset($_POST["passwort"])) { echo $_POST["passwort"]; } ?>"
+                        value="<?php if (isset($_POST["passwort"])) { echo htmlspecialchars($_POST["passwort"]); } ?>"
                     />
                 </div>
                 <div class="form-group">
@@ -120,7 +121,7 @@
                         name="passwort1"
                         size="20"
                         maxlength="30"
-                        value="<?php if (isset($_POST["passwort1"])) { echo $_POST["passwort1"]; } ?>"
+                        value="<?php if (isset($_POST["passwort1"])) { echo htmlspecialchars($_POST["passwort1"]); } ?>"
                     />
                 </div>
                 <button class="btn btn-primary mb-2" type="submit">Jetzt registrieren</button>

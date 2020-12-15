@@ -19,9 +19,9 @@
     //Artikel hinzufügen
     if(isset($_POST["hinzufuegen"])) {
         if (isset($_SESSION["warenkorb"][0])) {
-            $_SESSION["warenkorb"][count($_SESSION["warenkorb"])] = array("id" => $_POST["artikelID"], "anzahl" => $_POST["anzahl"]);
+            $_SESSION["warenkorb"][count($_SESSION["warenkorb"])] = array("id" => htmlspecialchars($_POST["artikelID"]), "anzahl" => htmlspecialchars($_POST["anzahl"]));
         } else {
-            $_SESSION["warenkorb"][0] = array("id" => $_POST["artikelID"], "anzahl" => $_POST["anzahl"]);
+            $_SESSION["warenkorb"][0] = array("id" => htmlspecialchars($_POST["artikelID"]), "anzahl" => htmlspecialchars($_POST["anzahl"]));
         }
     }
 
@@ -65,6 +65,8 @@ require "../navbar.php"; ?>
         echo "<td align='right'>" . number_format($gesamtpreis, 2, ',', '.') . " €</td>";
         echo "</tr>";
         $_SESSION["gesamtpreis"] = $gesamtpreis;
+
+        mysqli_close($con);
         ?>
         </table>
         <p><a href="kasse.php">Zur Kasse</a></p>

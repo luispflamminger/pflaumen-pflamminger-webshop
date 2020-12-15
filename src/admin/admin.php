@@ -25,8 +25,6 @@
     else {
         $meldung = "";
     }
-    //$con = mysqli_connect("","root");
-    //mysqli_select_db($con,"pflaumenshop");
     $con = db_verbinden();
     $sql ="SELECT * FROM kategorie";
     $res = mysqli_query($con, $sql);
@@ -42,12 +40,34 @@ require "../navbar.php";
 */
 ?>
 
-<body>
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <?php if ($meldung != "") { echo "<div class='alert alert-danger'>$meldung</div>"; } ?>
+        <p class="lead text-muted">
+            <?php
+            echo "Hallo ". $_SESSION["vorname"] . "!";
+            ?>
+        </p>
+        <h1>Kategorien</h1>
+        <p class="lead text-muted">Wähle eine Kategorie aus oder bearbeite sie.</p>
+    </div>
+
     <?php
-    echo "<div>Hallo ".$_SESSION["vorname"]."!</div>";
-    echo $meldung;
-        
+    // echo "<h1>Hallo ". $_SESSION["vorname"] . "!</h1>";
+    // echo $meldung;
     ?>
+
+    <div class="container py-5" style="max-width: 40em">
+        <div class="card mb-2">
+            <div class="card-body">
+                <p><a href="" class="card-title">Basic card</a></p>
+                <a href="" class="btn btn-primary" >Bearbeiten</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">Basic card</div>
+        </div>
+    </div>
     <table border = "1">
         <tr>
             <th>Kategoriename</th><th></th>
@@ -55,10 +75,11 @@ require "../navbar.php";
     <?php
     while ($dsatz = mysqli_fetch_assoc($res)) { 
         echo "<tr>";
-        echo "<td><a href='artikel.php?katId=" . $dsatz["id"] . "'>".$dsatz["name"]."</a></td>";
-        echo "<td> <a href='kat_bearbeiten.php?id=".$dsatz["id"]."&name=".htmlspecialchars($dsatz["name"])."'>Bearbeiten</a> </td>";
+        echo "<td><a href='artikel.php?katId=" . $dsatz["id"] . "'>" . $dsatz["name"] . "</a></td>";
+        echo "<td> <a href='kat_bearbeiten.php?id=" . $dsatz["id"] . "&name=" . $dsatz["name"] . "'>Bearbeiten</a> </td>";
         echo "</tr>";
     }
+    mysqli_close($con);
     ?>
         <tr>
             <td><a href = "kat_hinzufuegen.php">Neue Kategorie hinzufügen</a></td><td></td>

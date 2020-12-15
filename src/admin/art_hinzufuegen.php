@@ -16,10 +16,10 @@
         $sql = "SELECT * FROM artikel";
         $res = mysqli_query($con, $sql);
         
-        $name = $_POST["name"];
-        $beschreibung = $_POST["beschreibung"];
-        $kategorie = $_POST["kategorie"];
-        $preis = $_POST["preis"];
+        $name = htmlspecialchars($_POST["name"]);
+        $beschreibung = htmlspecialchars($_POST["beschreibung"]);
+        $kategorie = htmlspecialchars($_POST["kategorie"]);
+        $preis = htmlspecialchars($_POST["preis"]);
         
         //Prüfen ob Name bereits existiert
         $existiert = false;
@@ -120,6 +120,7 @@
                 }
             }
         }
+        mysqli_close($con);
     }
     ?>
 </head>
@@ -136,9 +137,9 @@
             $res = mysqli_query($con, $sql);
 
             if (isset($_GET["katId"])) {
-                $katId = $_GET["katId"];
+                $katId = htmlspecialchars($_GET["katId"]);
             } else if (isset($_POST["katId"])) {
-                $katId = $_POST["katId"];
+                $katId = htmlspecialchars($_POST["katId"]);
             } else {
                 $katId = 0;
             }
@@ -158,6 +159,7 @@
     <a href="artikel.php?katId=<?php echo $katId; ?>">Zurück</a>
     <?php
     echo "<p>$meldung</p>";
+    mysqli_close($con);
     ?>
 </body>
 </html>

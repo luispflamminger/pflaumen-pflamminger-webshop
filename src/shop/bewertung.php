@@ -9,7 +9,7 @@
         authentifizierung($_SESSION["typ"], "kunde");
     
         if (isset($_GET["id"])) {
-            $bewID = $_GET["id"];
+            $bewID = htmlspecialchars($_GET["id"]);
         } else {
             header("Location: start.php");
             exit;
@@ -34,6 +34,8 @@
         $sql = "SELECT vorname, name FROM benutzer WHERE id=" . $dsatzBew["benutzer"];
         $dsatzName = mysqli_fetch_assoc(mysqli_query($con, $sql));
 
+        mysqli_close($con);
+        
         echo "<title>Pflaumen Pflamminger: " . $dsatzBew["titel"] . "</title>";
         ?>
 
@@ -49,7 +51,7 @@
         echo "</p>";
         echo "<h4>" . $dsatzBew["titel"] . "</h4>";
         echo "<p>" . $dsatzBew["bewertung"] . " von 5 Pflaumen</p>";
-        echo "<p>" . $dsatzBew["beschreibung"] . "</p>";
+        echo "<p>" . nl2br($dsatzBew["beschreibung"]) . "</p>";
         ?>
 
         <h3>Antworten</h3>
@@ -68,7 +70,7 @@
                     echo "<p style='margin-left: ${ebene}em'>Bewertung von " . $dsatzName["vorname"] . " " . $dsatzName["name"] . "</p>";
                     echo "<p style='margin-left: ${ebene}em'>" . $dsatzAntwort["bewertung"] . " von 5 Pflaumen</p>";
                     echo "<h4 style='margin-left: ${ebene}em'>" . $dsatzAntwort["titel"] . "</h4>";
-                    echo "<p style='margin-left: ${ebene}em'>" . $dsatzAntwort["beschreibung"] . "</p>";
+                    echo "<p style='margin-left: ${ebene}em'>" . nl2br($dsatzAntwort["beschreibung"]) . "</p>";
                     echo "<a style='margin-left: ${ebene}em' href='bewertung.php?id=" . $dsatzAntwort["id"] . "'>Antwort anzeigen</a> | <a href='antw_verfassen.php?id=" . $dsatzAntwort["id"] . "'>Antwort verfassen</a>";
                     antworten_anzeigen($dsatzAntwort["id"], $ebene+4);
                 }

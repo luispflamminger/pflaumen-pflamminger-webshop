@@ -9,7 +9,7 @@
         authentifizierung($_SESSION["typ"], "kunde");
     
         if (isset($_GET["id"])) {
-            $id = $_GET["id"];
+            $id = htmlspecialchars($_GET["id"]);
         } else {
             header("Location: start.php");
             exit;
@@ -54,11 +54,13 @@
             echo "<p>Bewertung von " . $vornameBew["name"] . "</p>";
             echo "<p>" . $dsatzBew["bewertung"] . " von 5 Pflaumen</p>";
             echo "<h4>" . $dsatzBew["titel"] . "</h4>";
-            echo "<p>" . $dsatzBew["beschreibung"] . "</p>";
+            echo "<p>" . nl2br($dsatzBew["beschreibung"]) . "</p>";
             echo "<a href='bewertung.php?id=" . $dsatzBew["id"] . "'>Antworten anzeigen</a> | <a href='antw_verfassen.php?id=" . $dsatzBew["id"] . "'>Antwort verfassen</a>";
         }
         echo "<p>--------------------------------------------------------------</p>";
         echo "<a href='bew_verfassen.php?id=" . $dsatzArt["id"] . "'>Bewertung verfassen</a>"; 
+
+        mysqli_close($con);
         ?>
         <p><a href="start.php">Zur Startseite</a></p>
     </body>

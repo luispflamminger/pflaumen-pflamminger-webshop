@@ -9,7 +9,7 @@
     authentifizierung($_SESSION["typ"], "kunde");
 
     if (isset($_GET["id"])) {
-        $bewId = $_GET["id"];
+        $bewId = htmlspecialchars($_GET["id"]);
     }
 
     if(!isset($_POST["verfassen"])) {
@@ -25,14 +25,14 @@
             $meldung = "Ein Fehler ist aufgetreten...";
         } else {
             
-            $bewId = $_POST["bewId"];
+            $bewId = htmlspecialchars($_POST["bewId"]);
 
             $con = db_verbinden();
             $sql = "SELECT id FROM benutzer WHERE email = '" . $_SESSION["email"] . "'";
             $res = mysqli_query($con, $sql);
             $dsatz = mysqli_fetch_assoc($res);
 
-            $sql = "INSERT bewertung (titel, beschreibung, bewertung, benutzer, bezug) VALUES ('" . $_POST["titel"]
+            $sql = "INSERT bewertung (titel, beschreibung, bewertung, benutzer, bezug) VALUES ('" . htmlspecialchars($_POST["titel"])
                   . "', '" . $_POST["beschreibung"] . "', " . $_POST["bewertung"] . ", " . $dsatz["id"] . ", " . $bewId . ");";
 
             $res = mysqli_query($con, $sql);
@@ -44,6 +44,7 @@
             } else {
                 $meldung = "Etwas ist schiefgelaufen...";
             }
+            mysqli_close($con);
         }
         
 
