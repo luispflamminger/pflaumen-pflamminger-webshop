@@ -51,5 +51,6 @@
     </tr>
     </table>
 
+    <p><a href="admin.php">Zur Startseite</a></p>
 </body>
 </html>

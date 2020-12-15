@@ -45,7 +45,7 @@
                     $_SESSION["nachname"] = htmlspecialchars($_POST["nachname"]);
                     $_SESSION["email"] = htmlspecialchars($_POST["email"]);
                     $_SESSION["typ"] = "kunde";
-                    header("Location: shop.php?newUser=true");
+                    header("Location: ../shop/start.php?newUser=true");
                     exit;
                 }
                 mysqli_close($con);                

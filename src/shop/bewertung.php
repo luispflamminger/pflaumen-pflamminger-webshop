@@ -67,7 +67,7 @@
                     $dsatzName = mysqli_fetch_assoc(mysqli_query($con, $sql));
 
                     echo "<p style='margin-left: ${ebene}em'>--------------------------------------------------------------</p>";
-                    echo "<p style='margin-left: ${ebene}em'>Bewertung von " . $dsatzName["vorname"] . " " . $dsatzName["name"] . "</p>";
+                    echo "<p style='margin-left: ${ebene}em'>Antwort von " . $dsatzName["vorname"] . " " . $dsatzName["name"] . "</p>";
                     echo "<p style='margin-left: ${ebene}em'>" . $dsatzAntwort["bewertung"] . " von 5 Pflaumen</p>";
                     echo "<h4 style='margin-left: ${ebene}em'>" . $dsatzAntwort["titel"] . "</h4>";
                     echo "<p style='margin-left: ${ebene}em'>" . nl2br($dsatzAntwort["beschreibung"]) . "</p>";

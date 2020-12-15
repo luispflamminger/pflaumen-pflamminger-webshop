@@ -36,40 +36,48 @@ require "../navbar.php"; ?>
 
 <body>
     <h2>Warenkorb</h2>
-    <div>
-        <table border = "1">
-            <tr>
-                <th align="left">Artikel</th>
-                <th align="left">Nr.</th>
-                <th align="left">Einzelpreis</th>
-                <th align="left">Anzahl</th>
-                <th align="left">Gesamtpreis</th>
-            </tr>
+    
         <?php
-        $gesamtpreis = 0;
-        foreach ($_SESSION["warenkorb"] as $pos) {
-            $sql = "SELECT * FROM artikel WHERE id=" . $pos["id"];
-            $dsatz = mysqli_fetch_assoc(mysqli_query($con, $sql));
-            $positionspreis = $pos["anzahl"] * $dsatz["preis"];
+        if (isset($_SESSION["warenkorb"])) {
+    
+            echo "<div>";
+            echo "<table border = '1'>";
             echo "<tr>";
-            echo "<td>" . $dsatz["name"] . "</td>";
-            echo "<td align='right'>" . $dsatz["id"] . "</td>";
-            echo "<td align='right'>" . number_format($dsatz["preis"], 2, ',', '.') . " €</td>";
-            echo "<td align='right'>" . $pos["anzahl"] . "</td>";
-            echo "<td align='right'>" . number_format($positionspreis, 2, ',', '.') . " €</td>";
+            echo "<th align='left'>Artikel</th>";
+            echo "<th align='left'>Nr.</th>";
+            echo "<th align='left'>Einzelpreis</th>";
+            echo "<th align='left'>Anzahl</th>";
+            echo "<th align='left'>Gesamtpreis</th>";
             echo "</tr>";
-            $gesamtpreis += $positionspreis;
-        }
-        echo "<tr>";
-        echo "<td colspan='4'>Gesamteinkaufspreis</td>";
-        echo "<td align='right'>" . number_format($gesamtpreis, 2, ',', '.') . " €</td>";
-        echo "</tr>";
-        $_SESSION["gesamtpreis"] = $gesamtpreis;
 
+            $gesamtpreis = 0;
+            foreach ($_SESSION["warenkorb"] as $pos) {
+                $sql = "SELECT * FROM artikel WHERE id=" . $pos["id"];
+                $dsatz = mysqli_fetch_assoc(mysqli_query($con, $sql));
+                $positionspreis = $pos["anzahl"] * $dsatz["preis"];
+                echo "<tr>";
+                echo "<td>" . $dsatz["name"] . "</td>";
+                echo "<td align='right'>" . $dsatz["id"] . "</td>";
+                echo "<td align='right'>" . number_format($dsatz["preis"], 2, ',', '.') . " €</td>";
+                echo "<td align='right'>" . $pos["anzahl"] . "</td>";
+                echo "<td align='right'>" . number_format($positionspreis, 2, ',', '.') . " €</td>";
+                echo "</tr>";
+                $gesamtpreis += $positionspreis;
+            }
+            echo "<tr>";
+            echo "<td colspan='4'>Gesamteinkaufspreis</td>";
+            echo "<td align='right'>" . number_format($gesamtpreis, 2, ',', '.') . " €</td>";
+            echo "</tr>";
+            $_SESSION["gesamtpreis"] = $gesamtpreis;
+            echo "</table>";
+            echo "<p><a href='kasse.php'>Zur Kasse</a></p>";
+            echo "</div>";
+        } else {
+            echo "<p>Noch keine Artikel im Warenkorb!";
+        }
+        
         mysqli_close($con);
         ?>
-        </table>
-        <p><a href="kasse.php">Zur Kasse</a></p>
-    </div>
+
 </body>
 </html>

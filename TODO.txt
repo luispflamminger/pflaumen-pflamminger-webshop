@@ -1,8 +1,8 @@
-* Styles hinterlegen
-* Kategorie Fashion pflegen
+* Zurückknopf bei Artikel in Admin View
+* Bild ändern funktioniert noch nicht
+* Link hinzufügen auf Bewertungsseite zum Antworten des Hauptbeitrags
 * Code kommentieren
-* Foreign Keys in DB einrichten (kategorie in artikel, benutzer und artikel in bewertung)
-* Produkte aus dem Warenkorb entfernen können
+* Styles hinterlegen
 
 erledigt:
 x Änderungen an der Datenbank (beim Keiser noch übertragen):

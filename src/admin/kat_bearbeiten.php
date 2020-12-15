@@ -11,7 +11,6 @@
             //Nutzer kommt von admin.php
             $id = htmlspecialchars($_GET["id"]);
             $nameAlt = htmlspecialchars($_GET["name"]);
-            $nameNeu = "";
             $meldung = "";
         } else {
 
@@ -79,10 +78,10 @@
     <body>
         <h2>Kategorie ändern</h2>
         <p>Geben Sie einen neuen Namen für die Kategorie ein oder löschen Sie diese.</p>
-        <?php echo "<p>" . htmlspecialchars($_GET["name"]) . "</p>"; ?>
+        
         <form action="kat_bearbeiten.php" method="post">
         Kategoriename:<br>
-        <input type="text" name="nameNeu" size="20" maxlength="40" />
+        <input type="text" name="nameNeu" size="20" maxlength="40" value="<?php if (isset($nameNeu)) { echo $nameNeu; } else { echo $nameAlt; }; ?>"/>
         <br>
         <input type="hidden" name="id" value="<?php echo $id ?>" />
         <input type="hidden" name="nameAlt" value="<?php echo $nameAlt ?>" />

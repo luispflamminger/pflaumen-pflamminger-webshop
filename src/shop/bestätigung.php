@@ -29,11 +29,11 @@
     <?php
     if ($_GET["meldung"] == "paypal") {
         echo "Sie werden in Kürze zu PayPal weitergeleitet!";
-        header("Refresh:3;https://www.paypal.com");
+        header("Refresh:7;start.php");
         exit;
     } else if ($_GET["meldung"] == "kreditkarte") {
         echo "Vielen Dank für Ihren Kauf.<br>Sie werden in Kürze zur Startseite weitergeleitet.";
-        header("Refresh:5;start.php");
+        header("Refresh:7;start.php");
         exit;
     }
     ?>

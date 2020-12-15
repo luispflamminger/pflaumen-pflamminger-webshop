@@ -48,10 +48,11 @@
 
         <?php
         while ($dsatzBew = mysqli_fetch_assoc($res)) {
-            $sql = "SELECT name FROM benutzer WHERE id=" . $dsatzBew["benutzer"];
-            $vornameBew = mysqli_fetch_assoc(mysqli_query($con, $sql));
+            $sql = "SELECT name, vorname FROM benutzer WHERE id=" . $dsatzBew["benutzer"];
+            $dsatzName = mysqli_fetch_assoc(mysqli_query($con, $sql));
+        
             echo "<p>--------------------------------------------------------------</p>";
-            echo "<p>Bewertung von " . $vornameBew["name"] . "</p>";
+            echo "<p>Bewertung von " . $dsatzName["vorname"] . " " . $dsatzName["name"] . "</p>";
             echo "<p>" . $dsatzBew["bewertung"] . " von 5 Pflaumen</p>";
             echo "<h4>" . $dsatzBew["titel"] . "</h4>";
             echo "<p>" . nl2br($dsatzBew["beschreibung"]) . "</p>";

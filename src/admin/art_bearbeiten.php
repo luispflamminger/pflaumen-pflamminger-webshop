@@ -125,7 +125,7 @@
                 if ($keinBild) {
                     $sql = "UPDATE artikel SET name='$name', beschreibung='$beschreibung', kategorie=$kategorie, preis=$preis WHERE id=$id";
                 } else {
-                    $sql = "UPDATE artikel SET name='$name', beschreibung='$beschreibung', kategorie=$kategorie, bild='$bild', preis=$preis WHERE id=$id";
+                    $sql = "UPDATE artikel SET name='$name', beschreibung='$beschreibung', kategorie=$kategorie, bild='$zielpfad', preis=$preis WHERE id=$id";
                 }
                 
                 $res = mysqli_query($con, $sql);
