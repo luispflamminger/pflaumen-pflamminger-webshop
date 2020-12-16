@@ -9,7 +9,7 @@
             crossorigin="anonymous">
     <link rel="stylesheet" href="../custom-style.css">
 
-    <title>Pflaumen Pflamminger</title>
+    <title>Pflaumen Pflamminger: Bestellung erfolgreich!</title>
 
     <?php
     session_start();
@@ -23,20 +23,23 @@
 
     ?>
 </head>
-<body>
-    <h2>Kauf erfolgreich!</h2>
-    <p>
-    <?php
-    if ($_GET["meldung"] == "paypal") {
-        echo "Sie werden in Kürze zu PayPal weitergeleitet!";
-        header("Refresh:7;start.php");
-        exit;
-    } else if ($_GET["meldung"] == "kreditkarte") {
-        echo "Vielen Dank für Ihren Kauf.<br>Sie werden in Kürze zur Startseite weitergeleitet.";
-        header("Refresh:7;start.php");
-        exit;
-    }
-    ?>
-    </p>
+<body class="bg-light">
+
+    <div class="container text-center mt-5">
+        <h1>Bestellung abgeschlossen!</h1>
+        <p class="lead text-muted">
+            <?php
+            if ($_GET["meldung"] == "paypal") {
+                echo "Sie werden in Kürze zu PayPal weitergeleitet!";
+                header("Refresh:7;start.php");
+                exit;
+            } else if ($_GET["meldung"] == "kreditkarte") {
+                echo "Vielen Dank für Ihren Kauf.<br>Sie werden in Kürze zur Startseite weitergeleitet.";
+                header("Refresh:7;start.php");
+                exit;
+            }
+            ?>
+        </p>
+    </div>
 </body>
 </html>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet"
-                href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-                integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
-                crossorigin="anonymous">
-        <link rel="stylesheet" href="../custom-style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+            crossorigin="anonymous">
+    <link rel="stylesheet" href="../custom-style.css">
 
-    <title>Pflaumen Pflamminger</title>
+    <title>Pflaumen Pflamminger: Warenkorb</title>
 
     <?php
     session_start();
@@ -34,22 +34,23 @@ $activeFile = pathinfo(__FILE__, PATHINFO_FILENAME);
 $activeSubdir = substr(pathinfo(__FILE__, PATHINFO_DIRNAME), strrpos(pathinfo(__FILE__, PATHINFO_DIRNAME), "/")+1);
 require "../navbar.php"; ?>
 
-<body>
-    <h2>Warenkorb</h2>
-    
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <h1>Warenkorb</h1>
         <?php
         if (isset($_SESSION["warenkorb"])) {
-    
-            echo "<div>";
-            echo "<table border = '1'>";
-            echo "<tr>";
-            echo "<th align='left'>Artikel</th>";
-            echo "<th align='left'>Nr.</th>";
-            echo "<th align='left'>Einzelpreis</th>";
-            echo "<th align='left'>Anzahl</th>";
-            echo "<th align='left'>Gesamtpreis</th>";
-            echo "</tr>";
-
+        ?>
+    </div>
+    <div class="container py-5" style="max-width: 45em;">
+        <table class="table table-striped">
+            <tr>
+                <th >Artikel</th>
+                <th style="text-align: right;">Nr.</th>
+                <th style="text-align: right;">Einzelpreis</th>
+                <th style="text-align: right;">Anzahl</th>
+                <th style="text-align: right;">Gesamtpreis</th>
+            </tr>
+            <?php
             $gesamtpreis = 0;
             foreach ($_SESSION["warenkorb"] as $pos) {
                 $sql = "SELECT * FROM artikel WHERE id=" . $pos["id"];
@@ -64,18 +65,24 @@ require "../navbar.php"; ?>
                 echo "</tr>";
                 $gesamtpreis += $positionspreis;
             }
-            echo "<tr>";
-            echo "<td colspan='4'>Gesamteinkaufspreis</td>";
-            echo "<td align='right'>" . number_format($gesamtpreis, 2, ',', '.') . " €</td>";
-            echo "</tr>";
+            ?>
+            <tr>
+                <td colspan="4">Gesamteinkaufspreis</td>
+                <td align="right"><?php echo number_format($gesamtpreis, 2, ',', '.'); ?> €</td>
+            </tr>
+            <?php
             $_SESSION["gesamtpreis"] = $gesamtpreis;
-            echo "</table>";
-            echo "<p><a href='kasse.php'>Zur Kasse</a></p>";
-            echo "</div>";
+            ?>
+        </table>
+        <p><a class='btn btn-primary' href='kasse.php'>Zur Kasse</a></p>
+    </div>
+            <?php
         } else {
-            echo "<p>Noch keine Artikel im Warenkorb!";
+            ?>
+        <p class="lead text-muted">Noch keine Artikel im Warenkorb!</p>
+    </div>
+            <?php
         }
-        
         mysqli_close($con);
         ?>
 

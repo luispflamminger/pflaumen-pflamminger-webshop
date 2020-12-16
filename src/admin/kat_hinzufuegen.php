@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pflaumen Pflamminger: Kategorien</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+            crossorigin="anonymous">
+    <link rel="stylesheet" href="../custom-style.css">
+
+    <title>Pflaumen Pflamminger: Kategorie hinzufügen</title>
+    
     <?php
     session_start();
     require "../funktionen.php";
@@ -49,18 +58,21 @@
     
     ?>
 </head>
-<body>
-    <h2>Kategorie hinzufügen</h2>
-    <form action = kat_hinzufuegen.php method="post">
-        Kategoriename:
-        <input type="text" name="name" size=20 maxlength="40">
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <h1>Kategorie hinzufügen</h1>
+        <p class="lead text-muted">Füge eine neue Kategorie hinzu.</p>
+    </div>
+    <div class="container py-5" style="max-width: 40em;">
+        <?php if ($meldung != "") { echo "<div class='alert alert-danger'>$meldung</div>"; } ?>
+        <form action = kat_hinzufuegen.php method="post">
+            <div class="form-group">
+                <label for="name">Kategoriename:</label>
+                <input class="form-control" id="name" type="text" name="name" size="20" maxlength="40">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Hinzufügen">
+        </form>
         <br>
-        <input type="submit" value="Hinzufügen">
-    </form>
-    <br>
-    <a href="admin.php">Zurück</a>
-    <?php
-    echo "<p>$meldung</p>";
-    ?>
+        <a class="btn btn-secondary" href="admin.php">Zurück</a>
 </body>
 </html>

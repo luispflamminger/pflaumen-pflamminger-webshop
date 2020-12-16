@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pflaumen Pflamminger: Kategorien</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+            crossorigin="anonymous">
+    <link rel="stylesheet" href="../custom-style.css">
+
+    <title>Pflaumen Pflamminger: Artikel bearbeiten</title>
     <link rel="stylesheet" href="../style.css" />
     <?php
     session_start();
@@ -141,8 +149,13 @@
     }
     ?>
 </head>
-<body>
-    <h2>Artikel ändern</h2>
+<body class="bg-light">
+
+    <div class="container text-center mt-5">
+        <h1>Artikel bearbeiten</h1>
+        <p class="lead text-muted">Gib hier die neuen Daten des Artikels ein.</p>
+    </div>
+
     <?php
     // Artikelinformationen holen
     $con = db_verbinden();
@@ -150,34 +163,47 @@
     $res = mysqli_query($con, $sql);
     $dsatzArtikel = mysqli_fetch_assoc($res);
     ?>
+    <div class="container py-5" style="max-width: 40em;">
+        <?php if ($meldung != "") { echo "<div class='alert alert-danger'>$meldung</div>"; } ?>
+        <form action = art_bearbeiten.php method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Artikelname:</label>
+                <input class="form-control" type="text" id="name" name="name" size=20 maxlength="40" value="<?php echo $dsatzArtikel["name"]; ?>">
+            </div>
+            <div class="form-group">
+                <label for="beschreibung">Beschreibung:</label>
+                <textarea class="form-control" id="beschreibung" rows="8" cols="20" name="beschreibung"><?php echo $dsatzArtikel["beschreibung"]; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="kategorie">Kategorie:</label>
+                <select class="form-control" id="kategorie" name="kategorie" >
+                <?php
+                $sql = "SELECT * FROM kategorie";
+                $res = mysqli_query($con, $sql);
 
-    <form action = art_bearbeiten.php method="post" enctype="multipart/form-data">
-        Artikelname: <input type="text" name="name" size=20 maxlength="40" value="<?php echo $dsatzArtikel["name"]; ?>"><br>
-        Beschreibung: <textarea rows="8" cols="20" name="beschreibung"><?php echo $dsatzArtikel["beschreibung"]; ?></textarea><br>
-        Kategorie: 
-        <select name="kategorie" >
-            <?php
-            $sql = "SELECT * FROM kategorie";
-            $res = mysqli_query($con, $sql);
-
-            while ($dsatzKat = mysqli_fetch_assoc($res)) {
-                echo "\t\t\t<option value='" . $dsatzKat["id"] . "' ";
-                if ($dsatzKat["id"] == $dsatzArtikel["kategorie"]) { echo "selected "; }
-                echo ">" . $dsatzKat["name"] . "</option>\n";
-            }
-            ?>
-        </select><br>
-        Preis: <input type="number" step="0.01" name="preis" value="<?php echo $dsatzArtikel["preis"]; ?>"><br>
-        Bild: <input type="file" name="bild"> <br> (Falls Sie kein Bild hochladen, bleibt das bisherige Bild erhalten.)
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="hidden" name="nameAlt" value="<?php echo $dsatzArtikel["name"]; ?>">
-        <input type="submit" name="aendern" value="Ändern">
-    </form>
-    <br>
-    <a href="artikel.php?katId=<?php echo $dsatzArtikel["kategorie"]; ?>">Zurück</a>
-    <?php
-    echo "<p>" . $meldung . "</p>";
-    mysqli_close($con);
-    ?>
+                while ($dsatzKat = mysqli_fetch_assoc($res)) {
+                    echo "\t\t\t<option value='" . $dsatzKat["id"] . "' ";
+                    if ($dsatzKat["id"] == $dsatzArtikel["kategorie"]) { echo "selected "; }
+                    echo ">" . $dsatzKat["name"] . "</option>\n";
+                }
+                ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="preis">Preis:</label>
+                <input class="form-control" id="preis" type="number" step="0.01" name="preis" value="<?php echo $dsatzArtikel["preis"]; ?>">
+            </div>
+            <div class="form-group">
+                <label for="bild">Bild:</label>
+                <input class="form-control-file" id="bild" type="file" name="bild"><br>(Falls Sie kein Bild hochladen, bleibt das bisherige Bild erhalten.)
+            </div>
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <input type="hidden" name="nameAlt" value="<?php echo $dsatzArtikel["name"]; ?>">
+            <input class="btn btn-primary" type="submit" name="aendern" value="Ändern">
+        </form>
+        <br>
+        <a class="btn btn-secondary" href="artikel.php?katId=<?php echo $dsatzArtikel["kategorie"]; ?>">Zurück</a>
+        <?php mysqli_close($con); ?>
+    </div>
 </body>
 </html>

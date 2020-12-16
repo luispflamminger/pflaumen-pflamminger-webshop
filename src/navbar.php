@@ -11,7 +11,7 @@
             <a class="nav-link" href="../shop/start.php">Start<?php if ($activeFile == "start") { echo "<span class='sr-only'>(current)</span>"; } ?></a>
         </li>
         <li class="nav-item <?php if ($activeFile == "kategorie") { echo "active"; } ?>">
-            <a class="nav-link" href="../shop/kategorie.php">Produkte<?php if ($activeFile == "kategorie") { echo "<span class='sr-only'>(current)</span>"; } ?></a>
+            <a class="nav-link" href="../shop/kategorie.php">Artikel<?php if ($activeFile == "kategorie") { echo "<span class='sr-only'>(current)</span>"; } ?></a>
         </li>
         <li class="nav-item <?php if ($activeFile == "warenkorb") { echo "active"; } ?>">
             <a class="nav-link" href="../shop/warenkorb.php">Warenkorb<?php if ($activeFile == "warenkorb") { echo "<span class='sr-only'>(current)</span>"; } ?></a>

@@ -9,8 +9,8 @@
             crossorigin="anonymous">
     <link rel="stylesheet" href="../custom-style.css">
 
-    <title>Pflaumen Pflamminger</title>
-    <link rel="stylesheet" href="../style.css" />
+    <title>Pflaumen Pflamminger: Kategorien</title>
+    
     <?php
     session_start();
     require "../funktionen.php";
@@ -39,33 +39,35 @@
 
 <?php 
 $activeFile = pathinfo(__FILE__, PATHINFO_FILENAME);
+$activeSubdir = substr(pathinfo(__FILE__, PATHINFO_DIRNAME), strrpos(pathinfo(__FILE__, PATHINFO_DIRNAME), "/")+1);
 require "../navbar.php"; ?>
 
-<body>
-    <h2><?php echo $katName; ?></h2>
-    <table border="1">
-        <tr>
-            <th><!--Bild--></th>
-            <th>Artikelname</th>
-            <th>Beschreibung</th>
-            <th>Preis</th>
-        </tr>
-        <?php
-        while ($dsatz = mysqli_fetch_assoc($res)) { 
-            echo "";
-            echo "<tr>";
-            echo "<td><img src='../../" . $dsatz["bild"] . "' width='100' height='100' /></td>";
-            echo "<td><a href='artikel.php?id=".$dsatz["id"]."&name=".$dsatz["name"]."'>" . $dsatz["name"] . "</a></td>";
-            echo "<td>" . nl2br($dsatz["beschreibung"]) . "</td>";
-            echo "<td>" . number_format($dsatz["preis"], 2, ',', '.') . "&nbsp;&euro;</td>";
-            echo "</tr>";
-        }
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <h1><?php if ($katName == "") { echo "Alle Artikel"; } else { echo $katName; } ?></h1>
+    </div>
+    <div class="container py-5" style="max-width: 80em;">
+        <table class="table table-striped">
+            <tr>
+                <th><!--Bild--></th>
+                <th>Artikelname</th>
+                <th>Beschreibung</th>
+                <th style='text-align: right;'>Preis</th>
+            </tr>
+            <?php
+            while ($dsatz = mysqli_fetch_assoc($res)) { 
+                echo "";
+                echo "<tr>";
+                echo "<td><img src='../../" . $dsatz["bild"] . "' width='100' height='100' /></td>";
+                echo "<td><a style='display: block;' href='artikel.php?id=".$dsatz["id"]."&name=".$dsatz["name"]."'>" . $dsatz["name"] . "</a></td>";
+                echo "<td>" . nl2br($dsatz["beschreibung"]) . "</td>";
+                echo "<td style='text-align: right;'>" . number_format($dsatz["preis"], 2, ',', '.') . "&nbsp;&euro;</td>";
+                echo "</tr>";
+            }
 
-        mysqli_close($con);
-        ?>
-
-    </table>
-
-    <p><a href="start.php">Zur Startseite</a></p>
+            mysqli_close($con);
+            ?>
+        </table>
+    </div>
 </body>
 </html>

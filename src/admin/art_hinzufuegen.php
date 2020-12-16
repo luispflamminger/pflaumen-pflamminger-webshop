@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pflaumen Pflamminger: Kategorien</title>
-    <link rel="stylesheet" href="../style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+            crossorigin="anonymous">
+    <link rel="stylesheet" href="../custom-style.css">
+
+    <title>Pflaumen Pflamminger: Artikel hinzufügen</title>
+    
     <?php
     session_start();
     require "../funktionen.php";
@@ -124,42 +132,59 @@
     }
     ?>
 </head>
-<body>
-    <h2>Artikel hinzufügen</h2>
-    <form action = art_hinzufuegen.php method="post" enctype="multipart/form-data">
-        Artikelname: <input type="text" name="name" size=20 maxlength="40"><br>
-        Beschreibung: <textarea rows="8" cols="20" name="beschreibung"></textarea><br>
-        Kategorie: 
-        <select name="kategorie" >
-            <?php
-            $con = db_verbinden();
-            $sql = "SELECT * FROM kategorie";
-            $res = mysqli_query($con, $sql);
+<body class="bg-light">
+    <div class="container text-center mt-5">
+        <h1>Artikel hinzufügen</h1>
+        <p class="lead text-muted">Gib hier die Daten des neuen Artikels ein.</p>
+    </div>
+    <div class="container py-5" style="max-width: 40em;">
+        <?php if ($meldung != "") { echo "<div class='alert alert-danger'>$meldung</div>"; } ?>
+        <form action = art_hinzufuegen.php method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Artikelname:</label>
+                <input class="form-control" id="name" type="text" name="name" size=20 maxlength="40">
+            </div>
+            <div class="form-group">
+                <label for="beschreibung">Beschreibung:</label>
+                <textarea class="form-control" id="beschreibung" rows="8" cols="20" name="beschreibung"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="kategorie">Kategorie:</label>
+                <select class="form-control" id="kategorie" name="kategorie" >
+                <?php
+                $con = db_verbinden();
+                $sql = "SELECT * FROM kategorie";
+                $res = mysqli_query($con, $sql);
 
-            if (isset($_GET["katId"])) {
-                $katId = htmlspecialchars($_GET["katId"]);
-            } else if (isset($_POST["katId"])) {
-                $katId = htmlspecialchars($_POST["katId"]);
-            } else {
-                $katId = 0;
-            }
-            while ($dsatz = mysqli_fetch_assoc($res)) {
-                echo "\t\t\t<option value='" . $dsatz["id"] . "' ";
-                if ($dsatz["id"] = $katId) { echo "selected "; }
-                echo ">" . $dsatz["name"] . "</option>\n";
-            }
-            ?>
-        </select><br>
-        Preis: <input type="number" step="0.01" value="5.00" name="preis" ><br>
-        Bild: <input type="file" name="bild">
-        <input type="hidden" name="katId" value="<?php echo $katId; ?>">
-        <input type="submit" name="hinzufuegen" value="Hinzufügen">
-    </form>
-    <br>
-    <a href="artikel.php?katId=<?php echo $katId; ?>">Zurück</a>
-    <?php
-    echo "<p>$meldung</p>";
-    mysqli_close($con);
-    ?>
+                if (isset($_GET["katId"])) {
+                    $katId = htmlspecialchars($_GET["katId"]);
+                } else if (isset($_POST["katId"])) {
+                    $katId = htmlspecialchars($_POST["katId"]);
+                } else {
+                    $katId = 0;
+                }
+                while ($dsatz = mysqli_fetch_assoc($res)) {
+                    echo "\t\t\t<option value='" . $dsatz["id"] . "' ";
+                    if ($dsatz["id"] = $katId) { echo "selected "; }
+                    echo ">" . $dsatz["name"] . "</option>\n";
+                }
+                ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="preis">Preis:</label>
+                <input class="form-control" id="preis" type="number" step="0.01" value="5.00" name="preis" >
+            </div>
+            <div class="form-group">
+                <label for="bild">Bild:</label>
+                <input class="form-control-file" id="bild" type="file" name="bild">
+            </div>
+            <input type="hidden" name="katId" value="<?php echo $katId; ?>">
+            <input class="btn btn-primary" type="submit" name="hinzufuegen" value="Hinzufügen">
+        </form>
+        <br>
+        <a class="btn btn-secondary" href="artikel.php?katId=<?php echo $katId; ?>">Zurück</a>
+        <?php mysqli_close($con); ?>
+    </div>
 </body>
 </html>

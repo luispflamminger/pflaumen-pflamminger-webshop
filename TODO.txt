@@ -1,10 +1,14 @@
-* Zurückknopf bei Artikel in Admin View
-* Bild ändern funktioniert noch nicht
-* Link hinzufügen auf Bewertungsseite zum Antworten des Hauptbeitrags
 * Code kommentieren
-* Styles hinterlegen
+x Styles hinterlegen
+    x bew_verfassen
+    x artikel
+    x bestätigung
+    x bewertung
+    x Kasse
+    x warenkorb
 
 erledigt:
+x Überall head und navbar hinterlegen
 x Änderungen an der Datenbank (beim Keiser noch übertragen):
     x Feld artikel in Tabelle bewertung darf Null sein
     x Feld titel in Tabelle bewertung auf varchar(50) erhöhen

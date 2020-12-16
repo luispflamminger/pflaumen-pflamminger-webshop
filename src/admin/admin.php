@@ -9,7 +9,7 @@
             crossorigin="anonymous">
     <link rel="stylesheet" href="../custom-style.css">
 
-    <title>Pflaumen Pflamminger: Kategorien</title>
+    <title>Pflaumen Pflamminger: Admin Bereich</title>
     <?php
     session_start();
     require "../funktionen.php";
@@ -49,41 +49,27 @@ require "../navbar.php";
             ?>
         </p>
         <h1>Kategorien</h1>
-        <p class="lead text-muted">Wähle eine Kategorie aus oder bearbeite sie.</p>
+        <p class="lead text-muted">Wähle eine Kategorie aus, bearbeite sie oder füge eine neue hinzu.</p>
     </div>
 
-    <?php
-    // echo "<h1>Hallo ". $_SESSION["vorname"] . "!</h1>";
-    // echo $meldung;
-    ?>
-
-    <div class="container py-5" style="max-width: 40em">
-        <div class="card mb-2">
-            <div class="card-body">
-                <p><a href="" class="card-title">Basic card</a></p>
-                <a href="" class="btn btn-primary" >Bearbeiten</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">Basic card</div>
-        </div>
+    <div class="container py-5" style="max-width: 40em;">
+        <table class="table table-striped">
+            <tr>
+                <th>Kategoriename</th><th></th>
+            </tr>
+        <?php
+        while ($dsatz = mysqli_fetch_assoc($res)) { 
+            echo "<tr>";
+            echo "<td><a href='artikel.php?katId=" . $dsatz["id"] . "'>" . $dsatz["name"] . "</a></td>";
+            echo "<td style='text-align: right;'> <a class='btn btn-secondary' href='kat_bearbeiten.php?id=" . $dsatz["id"] . "&name=" . $dsatz["name"] . "'>Bearbeiten</a> </td>";
+            echo "</tr>";
+        }
+        mysqli_close($con);
+        ?>
+            <tr>
+                <td><a class='btn btn-primary' href = "kat_hinzufuegen.php">Neue Kategorie hinzufügen</a></td><td></td>
+            </tr>
+        </table>
     </div>
-    <table border = "1">
-        <tr>
-            <th>Kategoriename</th><th></th>
-        </tr>
-    <?php
-    while ($dsatz = mysqli_fetch_assoc($res)) { 
-        echo "<tr>";
-        echo "<td><a href='artikel.php?katId=" . $dsatz["id"] . "'>" . $dsatz["name"] . "</a></td>";
-        echo "<td> <a href='kat_bearbeiten.php?id=" . $dsatz["id"] . "&name=" . $dsatz["name"] . "'>Bearbeiten</a> </td>";
-        echo "</tr>";
-    }
-    mysqli_close($con);
-    ?>
-        <tr>
-            <td><a href = "kat_hinzufuegen.php">Neue Kategorie hinzufügen</a></td><td></td>
-        </tr>
-    </table>
 </body>
 </html>
