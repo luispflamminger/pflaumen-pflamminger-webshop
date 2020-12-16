@@ -1,0 +1,14 @@
+Installation:
+1. Ordner "pflaumen-pflamminger-webshop" in das Verzeichnis htdocs im xampp Ordner speichern
+2. phpmyadmin starten und eine Datenbank mit dem Namen "pflaumenshop" und Format "utf8mb4_general_ci" anlegen
+3. Die Datenbank anwählen, den Reiter "Importieren" anwählen und die Datei "pflaumenshop.sql" importieren
+4. Datei "login.php" im Ordner "login" starten
+
+Login-Daten:
+Admin:
+E-Mail: pflamminger@pflaumenshop.de
+Passwort: admin
+
+Kunde:
+E-Mail: thomas@pflaumenshop.de
+Passwort: kunde

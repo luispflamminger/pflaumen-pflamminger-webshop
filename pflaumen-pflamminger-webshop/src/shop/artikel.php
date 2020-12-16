@@ -53,7 +53,6 @@ require "../navbar.php"; ?>
             <div class="col-md-8">
                 <h2 class="mb-3"><?php echo $dsatzArt["name"]; ?></h2>
                 <p><?php echo $dsatzArt["beschreibung"]; ?></p>
-                <p class="font-weight-bolder" style="font-size: 1.25em;"><?php echo number_format($dsatzArt["preis"], 2, ',', '.'); ?> €</p>
 
                 <form action="warenkorb.php" method="POST">
                     <div class="form-group">
